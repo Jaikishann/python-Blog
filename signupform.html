@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/blog.css">
+</head>
+<body>
+<img src="/css/home.jpg">
+<div class="container well welcome" style="margin-top:10px">
+<h1>Signup</h1>
+<form method="post" class="col-xs-4">
+    username:<input type="text" class="form-control" name="username" value="{{name|escape}}"/><br>
+    Password:<input type="password" class="form-control" name="password"/><br>
+    EmailId: <input type="email" class="form-control" name="emailId" value="{{emailId|escape}}"><br>
+    <input type="submit" class="btn btn-primary cssbutton" value="submit"><br>
+    <br><small>Already an user? </small><a class="btn-link alink" href="/login">Login</a>
+    <br><br><div style="color:red">{{error}}</div>
+</form>
+
+</div>
+</body>
+</html>

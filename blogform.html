@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/blog.css">
+</head>
+<body>
+<img src="/css/home.jpg">
+<div class="container well welcome" style="margin-top:10px">
+<h1>Share your thoughts</h1>
+<form method="post">
+    Title: <textarea style="color:wheat" class="form-control" type="text" name="title">{{blogtitle}}</textarea><br>
+    content: <br><textarea  style="color:wheat" class="form-control" rows="20" cols="50" name="content">{{content}}</textarea><br>
+    <input class="btn btn-primary cssbutton" type="submit" value="submit">
+    <div style="color:red">{{error}}</div>
+</form>
+    <br><button class="btn btn-primary cssbutton" onclick="location.href='/'">home  <span class="glyphicon glyphicon-home"></span></button>
+</div>
+</body>
+</html>

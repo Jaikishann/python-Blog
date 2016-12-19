@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/blog.css">
+</head>
+<body>
+<img src="/css/home.jpg">
+<div class="container well welcome" style="margin-top:10px">
+    <h1>{{title}}</h1>
+    &emsp;<p class="text-muted">&emsp;{{content}}</p>
+    <small>~{{name}}</small><br><br>
+    {% if name == username %}
+    <button class="btn btn-primary cssbutton" onclick="location.href ='editblog?name={{name}}&m={{millis}}'">Edit  <span class="glyphicon glyphicon-edit"></span></button>
+    <button class="btn btn-primary cssbutton" onclick="location.href ='deleteblog?name={{name}}&m={{millis}}'">Delete  <span class="glyphicon glyphicon-trash"></span></button>
+
+    {% endif %}
+    <button class="btn btn-primary cssbutton" onclick=" location.href='/'">home  <span class="glyphicon glyphicon-home"></span></button>
+</div>
+
+</body>
+</html>

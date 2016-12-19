@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/blog.css">
+    <script src="blog.js"></script>
+</head>
+<body>
+<img src="/css/home.jpg">
+<div class="container well welcome" style="margin-top:10px">
+<h1>Welcome <small class="user">{{userName}}</small></h1>
+{% if userName == "" %}
+<button class="btn btn-primary cssbutton" onclick="location.href = 'signup'">signup  <span class="glyphicon glyphicon-user"></span></button>
+<button class="btn btn-primary cssbutton" onclick="location.href = 'login'">login  <span class="glyphicon glyphicon-log-in"></span></button>
+{% else %}
+<div>{{message}}</div><br>
+<button class="btn btn-primary cssbutton" onclick="location.href = 'createblog'">create blog  <span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-danger" onclick="location.href = 'logout'">logout  <span class="glyphicon glyphicon-log-out"></span></button>
+{% endif %}
+    </div>
+<div class="container blog">
+    <div class="sidenav">
+{% for b in blog %}
+
+<div class="list-group-item list-group-item-info" style="position:relative"><a class="btn-link" href="displaycontent?name={{b.name}}&m={{b.millis}}">{{ b.title }}</a> <small>~{{ b.name }}</small><span style="position:absolute;right:10px"><span class="glyphicon glyphicon-time"></span> {{b.created}}</span> <br></div>
+
+{% endfor %}
+        </div>
+    </div>
+
+
+</body>
+</html>
