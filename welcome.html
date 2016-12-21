@@ -26,7 +26,7 @@
     <div class="sidenav">
 {% for b in blog %}
 
-<div class="list-group-item list-group-item-info" style="position:relative"><a class="btn-link" href="displaycontent?name={{b.name}}&m={{b.millis}}">{{ b.title }}</a> <small>~{{ b.name }}</small><span style="position:absolute;right:10px"><span class="glyphicon glyphicon-time"></span> {{b.created}}</span> <br></div>
+<div class="list-group-item list-group-item-info" style="position:relative"><a class="btn-link" href="displaycontent/{{b.key.id}}">{{ b.title }}</a> <small>~{{ b.name }}</small><span style="position:absolute;right:10px"><span class="glyphicon glyphicon-time"></span> {{b.created}}</span> <br></div>
 
 {% endfor %}
         </div>

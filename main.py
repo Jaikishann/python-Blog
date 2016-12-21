@@ -174,20 +174,20 @@ class CreateBlog(Handler):
 
 
 class EditBlog(Handler):
-    key = 0
 
-    def get(self):
+
+    def get(self,id):
         cookie = str(self.request.cookies.get('user', ""))
         if cookie:
             user = ndb.Key(Cookies, cookie).get()
             userName = user.name
-        name = self.request.get("name")
+            blog = ndb.Key(Blogs, int(id)).get()
+            name = blog.name
+
         if name == userName:
-            millis = int(self.request.get("m"))
-            bl = Blogs.query(Blogs.name == name, Blogs.millis == millis).get()
-            title = bl.title
-            content = bl.content
-            EditBlog.key = bl.key.id()
+
+            title = blog.title
+            content = blog.content
             template_value = {
             "blogtitle":title,
             "content":content
@@ -196,39 +196,35 @@ class EditBlog(Handler):
         else:
             self.write("you cant change others blog")
 
-    def post(self):
+    def post(self,id):
         editedtitle = self.request.get("title")
         content = self.request.get("content")
         #cookie = str(self.request.cookies.get('user', ""))
 
         #user = ndb.Key(Cookies, cookie).get()
         #name = user.name
-        if EditBlog.key:
-            blog = ndb.Key(Blogs, EditBlog.key).get()
+        if id:
+            blog = ndb.Key(Blogs, int(id)).get()
             blog.title = editedtitle
             blog.content = content
             blog.put()
             self.write("updated successfully")
-            self.write(editedtitle)
-            self.write(EditBlog.key)
             self.redirect('/')
         else:
             self.write("something went wrong please try again")
 
 
 class DeleteBlog(Handler):
-    def get(self):
+    def get(self,id):
         cookie = str(self.request.cookies.get('user', ""))
         if cookie:
             user = ndb.Key(Cookies, cookie).get()
             userName = user.name
-        name = self.request.get("name")
-        if name == userName:
-            millis = int(self.request.get("m"))
-            bl = Blogs.query(Blogs.name == name, Blogs.millis == millis).get()
-            key = bl.key.id()
-            ndb.Key(Blogs, key).delete()
-            self.redirect('/')
+            blog = ndb.Key(Blogs, int(id)).get()
+            name = blog.name
+            if name == userName:
+                ndb.Key(Blogs, int(id)).delete()
+                self.redirect('/')
 
         else:
             self.write("you cant delete others blog")
@@ -237,13 +233,12 @@ class DeleteBlog(Handler):
 
 
 class DisplayContent(Handler):
-    def get(self):
-        name = self.request.get("name")
-        millis = int(self.request.get("m"))
-        bl = Blogs.query(Blogs.name == name, Blogs.millis == millis).get()
+    def get(self,id):
+
+        bl = ndb.Key(Blogs, int(id)).get()
         content = bl.content
         title = bl.title
-
+        name = bl.name
 
         cookie = str(self.request.cookies.get('user', ""))
         if cookie:
@@ -256,7 +251,7 @@ class DisplayContent(Handler):
             "title": title,
             "content": content,
             "username": userName,
-            "millis":millis
+            "id":id
         }
         self.write(template.render(contentPath, template_value))
 
@@ -274,6 +269,6 @@ app = webapp2.WSGIApplication([('/', Welcome),
                                ('/signup', Signup),
                                ('/logout', Logout),
                                ('/createblog',CreateBlog),
-                               ('/editblog', EditBlog),
-                               ('/deleteblog', DeleteBlog),
-                               ('/displaycontent',DisplayContent)], debug=True)
+                               ('/editblog/(\d+)', EditBlog),
+                               ('/deleteblog/(\d+)', DeleteBlog),
+                               ('/displaycontent/(\d+)',DisplayContent)], debug=True)
